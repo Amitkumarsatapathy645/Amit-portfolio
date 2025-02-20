@@ -42,7 +42,7 @@ export default function FeaturedProjects() {
         >
           <h2 className="text-3xl font-bold mb-4">Featured Projects</h2>
           <p className="text-lg text-muted-foreground">
-            Some of my recent work that I'm proud of
+            Some of my recent work that I&apos;m proud of
           </p>
         </motion.div>
 

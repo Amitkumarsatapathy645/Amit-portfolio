@@ -40,9 +40,9 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h2 className="text-3xl font-bold mb-4">Let's Work Together</h2>
+            <h2 className="text-3xl font-bold mb-4">Let&apos;s Work Together</h2>
             <p className="text-lg text-muted-foreground mb-8">
-              I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+              I&apos;m always open to discussing new projects, creative ideas or opportunities to be part of your visions.
             </p>
             <Button asChild size="lg">
               <a href="mailto:amitkumarsatapathy645@gmail.com">

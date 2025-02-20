@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
-import { FaReact, FaNodeJs, FaGit, FaDocker, FaAws, FaFigma, FaDatabase, FaAirbnb } from 'react-icons/fa'
+import { FaReact, FaNodeJs, FaGit, FaDocker, FaAws, FaFigma, FaDatabase } from 'react-icons/fa'
 import { IoLogoJavascript, IoLogoCss3 } from 'react-icons/io'
 import { SiNextdotjs, SiGraphql, SiRedux, SiFirebase, SiApachekafka } from 'react-icons/si'
 import { SiDjango } from "react-icons/si";

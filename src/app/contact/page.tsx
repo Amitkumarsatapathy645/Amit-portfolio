@@ -34,13 +34,13 @@ const ContactPage = () => {
         >
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Let's{' '}
+              Let&apos;s{' '}
               <span className="bg-gradient-to-r from-blue-600 to-violet-600 text-transparent bg-clip-text">
                 Connect
               </span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              Have an exciting project in mind? Let's bring it to life together!
+              Have an exciting project in mind? Let&apos;s bring it to life together!
             </p>
           </div>
 

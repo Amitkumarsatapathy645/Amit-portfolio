@@ -3,8 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-import { 
-  ArrowRight, 
+import {  
   Github, 
   Linkedin, 
   Mail, 
@@ -27,7 +26,7 @@ interface FloatingShape {
 
 export default function Hero() {
   const controls = useAnimation()
-  const [isVisible, setIsVisible] = useState(false)
+  // const [isVisible, setIsVisible] = useState(false)
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [floatingShapes, setFloatingShapes] = useState<FloatingShape[]>([])
 
@@ -47,7 +46,7 @@ export default function Hero() {
   }, [windowSize.width, windowSize.height]);
 
   useEffect(() => {
-    setIsVisible(true)
+    // setIsVisible(true)
     controls.start({
       y: 0,
       opacity: 1,
@@ -120,7 +119,7 @@ export default function Hero() {
         {/* Name and title */}
         <motion.div variants={itemVariants}>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Hi, I'm{' '}
+            Hi, I&apos;m{' '}
             <span className="bg-gradient-to-r from-blue-600 to-violet-600 text-transparent bg-clip-text animate-gradient-x">
               Amit Kumar Satapathy
             </span>
