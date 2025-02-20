@@ -46,18 +46,18 @@ const education = [
 
 const certifications = [
   {
-    name: "AWS Certified Developer",
-    issuer: "Amazon Web Services",
+    name: "Cisco Certification",
+    issuer: "Cisco network academy",
     date: "2023",
-    link: "https://aws.amazon.com/certification/"
+    link: "https://drive.google.com/drive/folders/1KrtYqcWasnZpqGeZd4_GEnLr6aO7OWgm?usp=sharing"
   },
   {
-    name: "Professional Web Developer",
-    issuer: "FreeCodeCamp",
+    name: "Google Cloud Certification",
+    issuer: "Google Cloud",
     date: "2022",
     link: "https://www.freecodecamp.org/"
   }
-]
+] 
 
 interface FloatingShape {
   x: number

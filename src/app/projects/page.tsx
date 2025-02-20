@@ -14,27 +14,27 @@ interface FloatingShape {
 const projects = [
   {
     title: "Snapgram",
-    description: "A full-stack e-commerce platform with real-time inventory and payment processing",
-    technologies: ["React.js", "TypeScript", "Stripe"],
+    description: "SnapGram – A fast and interactive social platform for sharing moments through photos, videos, and stories in real time.",
+    technologies: ["React", "Node.js", "MongoDB"],
     githubUrl: "https://github.com/Amitkumarsatapathy645",
     liveUrl: "https://snapbook-bay.vercel.app/",
     imageUrl: "/images/project1.png"
   },
   {
-    title: "Snapgram",
-    description: "A full-stack e-commerce platform with real-time inventory and payment processing",
-    technologies: ["React.js", "TypeScript", "Stripe"],
+    title: "Job Portal",
+    description: "JOBX – A fast, intuitive job portal connecting job seekers and employers with seamless applications and advanced filtering.",
+    technologies: ["React", "Node.js", "MongoDB","Tailwind CSS","Cloudinary","Framer Motion"],
     githubUrl: "https://github.com/Amitkumarsatapathy645",
-    liveUrl: "https://snapbook-bay.vercel.app/",
-    imageUrl: "/images/project1.png"
+    liveUrl: "",
+    imageUrl: "/images/project2.png"
   },
   {
-    title: "Snapgram",
-    description: "A full-stack e-commerce platform with real-time inventory and payment processing",
-    technologies: ["React.js", "TypeScript", "Stripe"],
+    title: "CustomTee",
+    description: "CustomTee – A 3D T-shirt design app for creating personalized styles with ease using Three.js and Vite.",
+    technologies: [" Three.js", "Vite ", "React ","Tailwind CSS","Node.js & Express"],
     githubUrl: "https://github.com/Amitkumarsatapathy645",
-    liveUrl: "https://snapbook-bay.vercel.app/",
-    imageUrl: "/images/project1.png"
+    liveUrl: "",
+    imageUrl: "/images/project3.jpg"
   },
   // ... other projects
 ]

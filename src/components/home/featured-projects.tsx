@@ -14,20 +14,20 @@ const featuredProjects = [
     link: "https://snapbook-bay.vercel.app/"
   },
   {
-    title: "Snapgram",
-    description: "SnapGram is a social media platform designed for seamless photo and video sharing, built with a modern tech stack. It allows users to upload, edit, and share their moments with an interactive feed, likes, comments, and real-time engagement. The platform is optimized for performance and scalability, ensuring a smooth user experience.",
-    image: "/images/project1.png",
-    tags: ["React", "Node.js", "MongoDB"],
-    link: "https://snapbook-bay.vercel.app/"
+    title: "Job Portal",
+    description: "JOBX is a modern job portal that connects job seekers with employers effortlessly. Built with React, Node.js, and MongoDB, it offers job postings, applications, and profile management in an intuitive interface. With advanced filtering and a seamless experience, JOBX makes job hunting and hiring efficient.",
+    image: "/images/project2.png",
+    tags: ["React", "Node.js", "MongoDB","Tailwind CSS","Cloudinary","Framer Motion"],
+    link: ""
   },
   {
-    title: "Snapgram",
-    description: "SnapGram is a social media platform designed for seamless photo and video sharing, built with a modern tech stack. It allows users to upload, edit, and share their moments with an interactive feed, likes, comments, and real-time engagement. The platform is optimized for performance and scalability, ensuring a smooth user experience.",
-    image: "/images/project1.png",
-    tags: ["React", "Node.js", "MongoDB"],
-    link: "https://snapbook-bay.vercel.app/"
+    title: "CustomTee",
+    description: "CustomTee is an interactive T-shirt design app that lets users create unique and stylish designs with ease. Built with modern web technologies, it offers features like drag-and-drop design tools, text customization, color selection, and image uploads. Whether for personal use or business branding, CustomTee provides a seamless and intuitive interface to bring creative ideas to life.",
+    image: "/images/project3.jpg",
+    tags: [" Three.js", "Vite ", "React ","Tailwind CSS","Node.js & Express"],
+    link: ""
   },
-  // Add more featured projects
+
 ]
 
 export default function FeaturedProjects() {

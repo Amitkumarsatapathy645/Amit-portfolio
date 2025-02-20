@@ -64,7 +64,7 @@ export default function AboutPage() {
            <h1 className="text-4xl md:text-5xl font-bold mb-4">
               About{' '}
               <span className="bg-gradient-to-r from-blue-600 to-violet-600 text-transparent bg-clip-text">
-                Connect
+                Me
               </span>
             </h1>
           <p className="text-lg text-muted-foreground">
