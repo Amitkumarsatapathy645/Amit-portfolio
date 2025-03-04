@@ -6,13 +6,13 @@ import { Button } from '@/components/ui/button'
 import { ArrowDown } from 'lucide-react'
 import Hero from '@/components/home/hero'
 import FeaturedProjects from '@/components/home/featured-projects'
-import dynamic from 'next/dynamic'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import ChatBot from '@/components/chatbot/ChatBot' // New component for the chatbot
 import { Card, CardContent } from '@/components/ui/card'
 import Link from 'next/link'
+import { siteConfig } from '@/lib/utils'
 
 
 // const techStack = ['React', 'Next.js', 'Node.js', 'TypeScript', 'MongoDB', 'AWS']
@@ -165,7 +165,7 @@ export default function HomePage() {
               I`&apos;`m always open to discussing new projects, creative ideas or opportunities to be part of your visions.
             </p>
             <Button asChild size="lg" aria-label="Contact me via email">
-              <a href={`mailto:${require('@/lib/utils').siteConfig.links.email}`}>
+            <a href={`mailto:${siteConfig.links.email}`}>
                 Get In Touch
               </a>
             </Button>
