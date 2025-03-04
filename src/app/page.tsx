@@ -14,11 +14,8 @@ import ChatBot from '@/components/chatbot/ChatBot' // New component for the chat
 import { Card, CardContent } from '@/components/ui/card'
 import Link from 'next/link'
 
-const TypeAnimation = dynamic<any>(() => import('react-type-animation').then(mod => mod.TypeAnimation), {
-  ssr: false,
-});
 
-const techStack = ['React', 'Next.js', 'Node.js', 'TypeScript', 'MongoDB', 'AWS']
+// const techStack = ['React', 'Next.js', 'Node.js', 'TypeScript', 'MongoDB', 'AWS']
 
 // Simulated list of LinkedIn newsletter posts (replace with your actual data)
 const newsletterPosts = [
@@ -163,9 +160,9 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h2 className="text-3xl font-bold mb-4">Let's Work Together</h2>
+            <h2 className="text-3xl font-bold mb-4">Let`&apos;`s Work Together</h2>
             <p className="text-lg text-muted-foreground mb-8">
-              I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+              I`&apos;`m always open to discussing new projects, creative ideas or opportunities to be part of your visions.
             </p>
             <Button asChild size="lg" aria-label="Contact me via email">
               <a href={`mailto:${require('@/lib/utils').siteConfig.links.email}`}>

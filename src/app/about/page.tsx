@@ -66,7 +66,7 @@ export default function AboutPage() {
             <span className="gradient-text">Me</span>
           </h1>
           <p className="text-lg text-muted-foreground">
-            I'm a passionate developer with over 3 years of experience building modern web applications. I specialize in creating user-friendly, scalable solutions that solve real-world problems.
+            I&apos;m a passionate developer with over 3 years of experience building modern web applications. I specialize in creating user-friendly, scalable solutions that solve real-world problems.
           </p>
         </motion.div>
 

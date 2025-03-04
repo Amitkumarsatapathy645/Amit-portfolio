@@ -4,13 +4,13 @@ import Navbar from '@/components/common/navbar'
 import Footer from '@/components/common/footer'
 import './globals.css'
 import { Metadata } from 'next'
+import { siteConfig } from '@/lib/utils'
 
 // Load font with subset for performance
 const inter = Inter({ subsets: ['latin'], display: 'swap' })
 
 // Dynamic metadata
 export const generateMetadata = (): Metadata => {
-  const siteConfig = require('@/lib/utils').siteConfig;
   return {
     title: `${siteConfig.name} - Portfolio`,
     description: siteConfig.description,

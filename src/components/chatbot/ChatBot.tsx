@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Send, X } from 'lucide-react'
-import Link from 'next/link'
 
 interface ChatBotProps {
   onClose: () => void;
