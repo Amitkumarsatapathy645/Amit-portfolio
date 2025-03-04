@@ -5,13 +5,22 @@ import { motion } from 'framer-motion'
 import { ProjectCard } from '@/components/projects/project-card'
 import { Button } from '@/components/ui/button'
 
+interface Project {
+  title: string;
+  description: string;
+  technologies: string[];
+  githubUrl: string;
+  liveUrl: string;
+  imageUrl: string;
+}
+
 interface FloatingShape {
   x: number
   y: number
   duration: number
 }
 
-const projects = [
+const projects: Project[] = [
   {
     title: "Snapgram",
     description: "SnapGram – A fast and interactive social platform for sharing moments through photos, videos, and stories in real time.",
@@ -23,7 +32,7 @@ const projects = [
   {
     title: "Job Portal",
     description: "JOBX – A fast, intuitive job portal connecting job seekers and employers with seamless applications and advanced filtering.",
-    technologies: ["React", "Node.js", "MongoDB","Tailwind CSS","Cloudinary","Framer Motion"],
+    technologies: ["React", "Node.js", "MongoDB", "Tailwind CSS", "Cloudinary", "Framer Motion"],
     githubUrl: "https://github.com/Amitkumarsatapathy645",
     liveUrl: "",
     imageUrl: "/images/project2.png"
@@ -31,13 +40,12 @@ const projects = [
   {
     title: "CustomTee",
     description: "CustomTee – A 3D T-shirt design app for creating personalized styles with ease using Three.js and Vite.",
-    technologies: [" Three.js", "Vite ", "React ","Tailwind CSS","Node.js & Express"],
+    technologies: ["Three.js", "Vite", "React", "Tailwind CSS", "Node.js & Express"],
     githubUrl: "https://github.com/Amitkumarsatapathy645",
     liveUrl: "",
     imageUrl: "/images/project3.jpg"
   },
-  // ... other projects
-]
+];
 
 const technologies = ["All", "Next.js", "React.js", "TypeScript", "Node.js"]
 
@@ -50,10 +58,10 @@ export default function ProjectsPage() {
     if (typeof window !== "undefined") {
       setWindowSize({ width: window.innerWidth, height: window.innerHeight })
       
-      const shapes = [...Array(5)].map(() => ({
+      const shapes = [...Array(3)].map(() => ({
         x: Math.random() * window.innerWidth,
         y: -100,
-        duration: Math.random() * 10 + 20,
+        duration: Math.random() * 5 + 10,
       }))
       
       setFloatingShapes(shapes)
@@ -86,7 +94,7 @@ export default function ProjectsPage() {
   }
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen" aria-label="Projects by Amit Kumar Satapathy">
       {/* Animated background gradient */}
       <div className="fixed inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10 animate-gradient-xy" />
       
@@ -95,7 +103,8 @@ export default function ProjectsPage() {
         {floatingShapes.map((shape, i) => (
           <motion.div
             key={i}
-            className="absolute h-32 w-32 rounded-full bg-primary/5"
+            className="absolute h-24 w-24 rounded-full bg-primary/5 will-change-transform"
+            aria-hidden="true"
             initial={{ x: shape.x, y: shape.y }}
             animate={{
               x: Math.random() * windowSize.width,
@@ -123,9 +132,7 @@ export default function ProjectsPage() {
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               My{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-violet-600 text-transparent bg-clip-text">
-                Projects
-              </span>
+              <span className="gradient-text">Projects</span>
             </h1>
             <p className="text-lg text-muted-foreground">
               A collection of my recent work and side projects
@@ -147,6 +154,7 @@ export default function ProjectsPage() {
                   variant={filter === tech ? "default" : "outline"}
                   onClick={() => setFilter(tech)}
                   className="mb-2 backdrop-blur-sm"
+                  aria-label={`Filter projects by ${tech}`}
                 >
                   {tech}
                 </Button>

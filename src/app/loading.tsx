@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card'
 
 export default function Loading() {
   return (
-    <div className="container mx-auto px-4 py-24">
+    <div className="container mx-auto px-4 py-24" aria-label="Loading content">
       <div className="space-y-8">
         {/* Header Skeleton */}
         <div className="text-center space-y-4">

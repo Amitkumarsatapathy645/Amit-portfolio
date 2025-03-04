@@ -1,13 +1,35 @@
-'use client'
-// src/app/layout.tsx
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import Navbar from '@/components/common/navbar'
 import Footer from '@/components/common/footer'
-// import { metadata } from './metadata'
 import './globals.css'
+import { Metadata } from 'next'
 
-const inter = Inter({ subsets: ['latin'] })
+// Load font with subset for performance
+const inter = Inter({ subsets: ['latin'], display: 'swap' })
+
+// Dynamic metadata
+export const generateMetadata = (): Metadata => {
+  const siteConfig = require('@/lib/utils').siteConfig;
+  return {
+    title: `${siteConfig.name} - Portfolio`,
+    description: siteConfig.description,
+    openGraph: {
+      title: `${siteConfig.name} - Portfolio`,
+      description: siteConfig.description,
+      url: siteConfig.url,
+      images: [siteConfig.ogImage],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${siteConfig.name} - Portfolio`,
+      description: siteConfig.description,
+      images: [siteConfig.ogImage],
+    },
+    keywords: ['full stack developer', 'next.js portfolio', 'web developer'],
+  };
+};
 
 export default function RootLayout({
   children,
@@ -24,11 +46,15 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="min-h-screen flex flex-col">
-            <Navbar />
-            <main className="flex-grow">
+            <header role="banner">
+              <Navbar />
+            </header>
+            <main className="flex-grow" role="main">
               {children}
             </main>
-            <Footer />
+            <footer role="contentinfo">
+              <Footer />
+            </footer>
           </div>
         </ThemeProvider>
       </body>

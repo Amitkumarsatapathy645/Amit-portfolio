@@ -1,9 +1,16 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
+import { motion } from 'framer-motion'
+import { Card, CardContent } from '@/components/ui/card'
 
-const experiences = [
+interface Experience {
+  title: string;
+  company: string;
+  period: string;
+  description: string;
+}
+
+const experiences: Experience[] = [
   {
     title: "SDE Intern",
     company: "iServeu",
@@ -14,14 +21,14 @@ const experiences = [
   {
     title: "Data Engineer",
     company: "DRDO",
-    period: "may 2024 - july 2024",
+    period: "May 2024 - July 2024",
     description:
       "Worked on lift-off detection of flight vehicles using Apache Kafka. My role involved designing a real-time data streaming system to process and analyze telemetry data for accurate launch event detection.",
   },
   {
     title: "Frontend Intern",
     company: "RadicaiAI",
-    period: "june 2023 - september 2023",
+    period: "June 2023 - September 2023",
     description:
       "At Radical AI, I worked on SEO optimization and API development. My role involved enhancing website visibility through technical SEO and optimizing APIs for better performance and scalability.",
   },
@@ -32,12 +39,11 @@ const experiences = [
     description:
       "At Suravi.io, I worked as a Django Developer, focusing on backend development and API integration. My role involved building scalable web applications, optimizing database queries, and ensuring efficient data handling using Django, PostgreSQL, and REST APIs.",
   },
-  // Add more experiences
 ];
 
 export function ExperienceTimeline() {
   return (
-    <div className="relative">
+    <div className="relative" aria-label="Timeline of professional experience">
       {/* Timeline line */}
       <div className="absolute left-0 md:left-1/2 h-full w-0.5 bg-accent" />
 
@@ -51,9 +57,10 @@ export function ExperienceTimeline() {
           className={`flex flex-col md:flex-row gap-8 mb-8 relative ${
             index % 2 === 0 ? "md:flex-row-reverse" : ""
           }`}
+          role="listitem"
         >
           <div className="flex-1" />
-          <div className="absolute left-0 md:left-1/2 w-3 h-3 bg-primary rounded-full transform -translate-x-1/2 mt-6" />
+          <div className="absolute left-0 md:left-1/2 w-3 h-3 bg-primary rounded-full transform -translate-x-1/2 mt-6" aria-hidden="true" />
           <Card className="flex-1">
             <CardContent className="p-6">
               <h3 className="text-xl font-semibold">{experience.title}</h3>

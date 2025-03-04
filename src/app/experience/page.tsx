@@ -1,37 +1,55 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion} from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Briefcase, GraduationCap, Award } from 'lucide-react'
 
-// Define the data objects at the top of the file
-const experiences = [
+// Define interfaces for type safety
+interface Experience {
+  title: string;
+  company: string;
+  period: string;
+  location?: string;
+  responsibilities?: string[];
+  description?: string;
+}
+
+interface Education {
+  degree: string;
+  school: string;
+  period: string;
+  achievements?: string[];
+}
+
+interface Certification {
+  name: string;
+  issuer: string;
+  date: string;
+  link: string;
+}
+
+const experiences: Experience[] = [
   {
     title: "SDE Intern",
     company: "iServeu",
     period: "2024 - Present",
-    location: "Bhubaneswar,Odisha",
-    responsibilities: [
-      "Contributing to the development of scalable fintech applications using React, Next.js, Node.js, Go, PostgreSQL, and MongoDB, ensuring seamless integration and efficient data handling.",
-      "Contributing to performance optimization by utilizing pprof for memory profiling and optimizing backend processes for improved resource utilization and speed.",
-      "Contributing to system monitoring by implementing Grafana and Prometheus, enabling real-time performance tracking and ensuring application stability and reliability.",
-    ]
+    location: "Bhubaneswar, Odisha",
+    description:
+      "As a Full Stack Developer, I work with React, Next.js, Node.js, Go, PostgreSQL, and MongoDB, focusing on scalable fintech applications. I optimize performance with pprof, Grafana, and Prometheus for memory profiling and monitoring.",
   },
   {
     title: "Data Engineer",
     company: "DRDO",
     period: "May 2024 - July 2024",
-    location: "Chandipur,Balasore, Odisha",
-    responsibilities: [
-      "Designed a real-time data streaming system using Apache Kafka to handle large volumes of telemetry data for flight vehicle lift-off detection.",
-      "Developed data processing pipelines to analyze real-time telemetry feeds, ensuring timely detection of critical launch events.",
-      "Optimized system performance and reliability by fine-tuning Kafka configurations and integrating fault-tolerant mechanisms for accurate and continuous event detection."
-    ]
-  }
-]
+    location: "Chandipur, Balasore, Odisha",
+    description:
+      "Worked on lift-off detection of flight vehicles using Apache Kafka. My role involved designing a real-time data streaming system to process and analyze telemetry data for accurate launch event detection.",
+  },
+  // ... (add other experiences as needed)
+];
 
-const education = [
+const education: Education[] = [
   {
     degree: "Bachelor of Technology in Electronics and TeleCommunication Engineering",
     school: "Veer Surendra Sai University of Technology",
@@ -42,12 +60,12 @@ const education = [
       "Taught Underprivileged Students at Sanskar Kendra – Volunteered as a mentor."
     ]
   }
-]
+];
 
-const certifications = [
+const certifications: Certification[] = [
   {
     name: "Cisco Certification",
-    issuer: "Cisco network academy",
+    issuer: "Cisco Network Academy",
     date: "2023",
     link: "https://drive.google.com/drive/folders/1KrtYqcWasnZpqGeZd4_GEnLr6aO7OWgm?usp=sharing"
   },
@@ -55,9 +73,9 @@ const certifications = [
     name: "Google Cloud Certification",
     issuer: "Google Cloud",
     date: "2022",
-    link: "https://www.freecodecamp.org/"
+    link: "https://drive.google.com/drive/"
   }
-] 
+];
 
 interface FloatingShape {
   x: number
@@ -73,10 +91,10 @@ export default function ExperiencePage() {
     if (typeof window !== "undefined") {
       setWindowSize({ width: window.innerWidth, height: window.innerHeight })
       
-      const shapes = [...Array(5)].map(() => ({
+      const shapes = [...Array(3)].map(() => ({
         x: Math.random() * window.innerWidth,
         y: -100,
-        duration: Math.random() * 10 + 20,
+        duration: Math.random() * 5 + 10,
       }))
       
       setFloatingShapes(shapes)
@@ -105,7 +123,7 @@ export default function ExperiencePage() {
   }
 
   return (
-    <div className="relative min-h-screen ">
+    <div className="relative min-h-screen" aria-label="Experience and education of Amit Kumar Satapathy">
       {/* Animated background gradient */}
       <div className="fixed inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10 animate-gradient-xy" />
       
@@ -114,7 +132,8 @@ export default function ExperiencePage() {
         {floatingShapes.map((shape, i) => (
           <motion.div
             key={i}
-            className="absolute h-32 w-32 rounded-full bg-primary/5"
+            className="absolute h-24 w-24 rounded-full bg-primary/5 will-change-transform"
+            aria-hidden="true"
             initial={{ x: shape.x, y: shape.y }}
             animate={{
               x: Math.random() * windowSize.width,
@@ -142,9 +161,7 @@ export default function ExperiencePage() {
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               My{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-violet-600 text-transparent bg-clip-text">
-                Journey
-              </span>
+              <span className="gradient-text">Journey</span>
             </h1>
             <p className="text-lg text-muted-foreground">
               A timeline of my professional experience and education
@@ -154,7 +171,7 @@ export default function ExperiencePage() {
           {/* Professional Experience */}
           <motion.section variants={itemVariants} className="mb-16">
             <div className="flex items-center mb-8">
-              <Briefcase className="w-6 h-6 mr-2 text-primary" />
+              <Briefcase className="w-6 h-6 mr-2 text-primary" aria-hidden="true" />
               <h2 className="text-3xl font-bold">Professional Experience</h2>
             </div>
             <div className="space-y-6">
@@ -173,25 +190,14 @@ export default function ExperiencePage() {
                       <div className="text-muted-foreground">
                         {experience.company} • {experience.period}
                       </div>
-                      <div className="text-sm text-muted-foreground">
-                        {experience.location}
-                      </div>
+                      {experience.location && (
+                        <div className="text-sm text-muted-foreground">
+                          {experience.location}
+                        </div>
+                      )}
                     </CardHeader>
                     <CardContent>
-                      <ul className="space-y-2">
-                        {experience.responsibilities.map((responsibility, idx) => (
-                          <motion.li
-                            key={idx}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: idx * 0.1 }}
-                            className="flex items-start"
-                          >
-                            <span className="w-2 h-2 rounded-full bg-primary/60 mr-2 mt-2" />
-                            {responsibility}
-                          </motion.li>
-                        ))}
-                      </ul>
+                      <p>{experience.description}</p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -202,7 +208,7 @@ export default function ExperiencePage() {
           {/* Education */}
           <motion.section variants={itemVariants} className="mb-16">
             <div className="flex items-center mb-8">
-              <GraduationCap className="w-6 h-6 mr-2 text-primary" />
+              <GraduationCap className="w-6 h-6 mr-2 text-primary" aria-hidden="true" />
               <h2 className="text-3xl font-bold">Education</h2>
             </div>
             <div className="space-y-6">
@@ -221,8 +227,8 @@ export default function ExperiencePage() {
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <ul className="space-y-2">
-                        {edu.achievements.map((achievement, idx) => (
+                      <ul className="space-y-2 list-disc pl-5">
+                        {edu.achievements?.map((achievement, idx) => (
                           <motion.li
                             key={idx}
                             initial={{ opacity: 0, x: -20 }}
@@ -230,7 +236,6 @@ export default function ExperiencePage() {
                             transition={{ delay: idx * 0.1 }}
                             className="flex items-start"
                           >
-                            <span className="w-2 h-2 rounded-full bg-primary/60 mr-2 mt-2" />
                             {achievement}
                           </motion.li>
                         ))}
@@ -245,7 +250,7 @@ export default function ExperiencePage() {
           {/* Certifications */}
           <motion.section variants={itemVariants}>
             <div className="flex items-center mb-8">
-              <Award className="w-6 h-6 mr-2 text-primary" />
+              <Award className="w-6 h-6 mr-2 text-primary" aria-hidden="true" />
               <h2 className="text-3xl font-bold">Certifications</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -268,6 +273,7 @@ export default function ExperiencePage() {
                         rel="noopener noreferrer"
                         className="text-primary hover:underline inline-flex items-center"
                         whileHover={{ x: 5 }}
+                        aria-label={`View ${cert.name} certificate`}
                       >
                         View Certificate
                         <motion.span className="ml-1">→</motion.span>

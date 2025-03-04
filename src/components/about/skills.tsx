@@ -1,3 +1,5 @@
+'use client'
+
 import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { FaReact, FaNodeJs, FaGit, FaDocker, FaAws, FaFigma, FaDatabase } from 'react-icons/fa'
@@ -11,8 +13,19 @@ import { MdLeaderboard } from "react-icons/md";
 import { RiUserCommunityFill } from "react-icons/ri";
 import { GiHeavyCollar } from "react-icons/gi";
 import { IoTimer } from "react-icons/io5";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from '@/components/ui/hover-card'
 
-const skills = [
+interface Skill {
+  name: string;
+  icon: React.ReactNode;
+}
+
+interface SkillGroup {
+  category: string;
+  items: Skill[];
+}
+
+const skills: SkillGroup[] = [
   {
     category: "Frontend",
     items: [
@@ -72,7 +85,7 @@ const skills = [
 
 export function Skills() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6" aria-label="Skills and expertise of Amit Kumar Satapathy">
       {skills.map((skillGroup, groupIndex) => (
         <motion.div
           key={skillGroup.category}
@@ -86,17 +99,27 @@ export function Skills() {
               <h3 className="text-xl font-semibold mb-4">{skillGroup.category}</h3>
               <div className="flex flex-wrap gap-2">
                 {skillGroup.items.map((skill, index) => (
-                  <motion.span
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="px-3 py-1 rounded-full bg-accent flex items-center gap-2"
-                  >
-                    <span>{skill.icon}</span>
-                    <span>{skill.name}</span>
-                  </motion.span>
+                  <HoverCard key={skill.name}>
+                    <HoverCardTrigger asChild>
+                      <motion.span
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="px-3 py-1 rounded-full bg-accent flex items-center gap-2 cursor-pointer"
+                        role="button"
+                        aria-label={`Skill: ${skill.name}`}
+                      >
+                        <span>{skill.icon}</span>
+                        <span>{skill.name}</span>
+                      </motion.span>
+                    </HoverCardTrigger>
+                    <HoverCardContent>
+                      <p>Proficiency: Advanced | Years of Experience: 3+</p>
+                    </HoverCardContent>
+                  </HoverCard>
                 ))}
               </div>
             </CardContent>
