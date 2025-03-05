@@ -9,7 +9,7 @@ import FeaturedProjects from '@/components/home/featured-projects'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import ChatBot from '@/components/chatbot/ChatBot' // New component for the chatbot
+import ChatBot from '@/components/chatbot/ChatBot' 
 import { Card, CardContent } from '@/components/ui/card'
 import Link from 'next/link'
 import { siteConfig } from '@/lib/utils'
@@ -17,22 +17,21 @@ import { siteConfig } from '@/lib/utils'
 
 // const techStack = ['React', 'Next.js', 'Node.js', 'TypeScript', 'MongoDB', 'AWS']
 
-// Simulated list of LinkedIn newsletter posts (replace with your actual data)
 const newsletterPosts = [
   {
-    title: "The Future of Full Stack Development in 2025",
-    description: "Exploring trends and technologies shaping web development.",
-    url: "https://www.linkedin.com/newsletters/your-newsletter-slug/post-1",
+    title: "AWS S3 Simplified: The Storage Solution You Need to Know",
+    description: "Amazon S3 (Simple Storage Service) - the backbone of cloud storage that achieves legendary 11 9's durability",
+    url: "https://www.linkedin.com/pulse/aws-s3-simplified-storage-solution-you-need-know-amit-kumar-satapathy-3n0cc/?trackingId=B6BjPn6PR0OTgpo%2Bhj6jyQ%3D%3D",
   },
   {
-    title: "Mastering Next.js for Scalable Apps",
-    description: "Tips and tricks for building high-performance Next.js applications.",
-    url: "https://www.linkedin.com/newsletters/your-newsletter-slug/post-2",
+    title: "Understanding AWS VPC: Your Private Property in the Cloud",
+    description: " AWS Virtual Private Cloud (VPC) by comparing it to real estate development! Learn how AWS solved early cloud security challenges by creating digital gated communities where your resources stay safe.",
+    url: "https://www.linkedin.com/pulse/understanding-aws-vpc-your-private-property-cloud-satapathy-u77ac/?trackingId=KYPwTgAIRMSk%2BMI%2BfDlpyA%3D%3D",
   },
   {
-    title: "DevOps Best Practices for Developers",
-    description: "How to implement CI/CD and Docker in your projects.",
-    url: "https://www.linkedin.com/newsletters/your-newsletter-slug/post-3",
+    title: "Understanding AWS IAM: A Deep Dive",
+    description: "Dive deep into AWS Identity and Access Management (IAM)—the backbone of AWS security",
+    url: "https://www.linkedin.com/pulse/understanding-aws-iam-deep-dive-amit-kumar-satapathy-jsw6c/?trackingId=ABJQX6%2BiQOG8xd%2Bnu%2Fv2tQ%3D%3D",
   },
 ];
 
@@ -140,7 +139,7 @@ export default function HomePage() {
             </div>
             <Button asChild size="lg" aria-label="Visit my LinkedIn newsletter">
               <a 
-                href="https://www.linkedin.com/newsletters/your-newsletter-slug/" 
+                href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7296782276594479105" 
                 target="_blank" 
                 rel="noopener noreferrer"
               >
@@ -160,9 +159,9 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h2 className="text-3xl font-bold mb-4">Let`&apos;`s Work Together</h2>
+            <h2 className="text-3xl font-bold mb-4">Let&apos;s Work Together</h2>
             <p className="text-lg text-muted-foreground mb-8">
-              I`&apos;`m always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+              I&apos;m always open to discussing new projects, creative ideas or opportunities to be part of your visions.
             </p>
             <Button asChild size="lg" aria-label="Contact me via email">
             <a href={`mailto:${siteConfig.links.email}`}>
