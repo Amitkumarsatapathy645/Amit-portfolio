@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Send, X, Copy, Volume2, VolumeX, Trash2 } from 'lucide-react';
+import { Send, X, Copy, Volume2, VolumeX, Trash2, ChevronUp, ChevronDown } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 interface ChatBotProps {
@@ -18,7 +18,7 @@ interface Message {
 export default function ChatBot({ onClose }: ChatBotProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
-      text: "Greetings! I’m Amit’s virtual assistant. How may I assist you today? Try asking about skills, projects, or something silly like 'joke'!",
+      text: "Greetings! I'm Amit's virtual assistant. How may I assist you today? Try asking about skills, projects, or something silly like 'joke'!",
       isUser: false,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     },
@@ -29,16 +29,39 @@ export default function ChatBot({ onClose }: ChatBotProps) {
   const [isSoundOn, setIsSoundOn] = useState(false);
   const [isPartyMode, setIsPartyMode] = useState(false);
   const [lastQuery, setLastQuery] = useState<string | null>(null);
+  const [showSuggestions, setShowSuggestions] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll and focus
   useEffect(() => {
     if (messagesEndRef.current && !isMinimized) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-    inputRef.current?.focus();
+    if (!isMinimized) {
+      inputRef.current?.focus();
+    }
   }, [messages, isMinimized]);
+
+  // Handle window resize and adjust for mobile
+  useEffect(() => {
+    const handleResize = () => {
+      // Auto-minimize on very small screens when first loaded
+      if (window.innerWidth < 480 && chatContainerRef.current) {
+        // Don't auto-minimize if user has already interacted
+        if (messages.length <= 1) {
+          setIsMinimized(true);
+        }
+      }
+    };
+
+    // Initial check
+    handleResize();
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [messages.length]);
 
   const handleSend = () => {
     if (!input.trim()) return;
@@ -53,32 +76,32 @@ export default function ChatBot({ onClose }: ChatBotProps) {
     setInput('');
 
     const botResponses: { [key: string]: string | ((last: string | null) => string) } = {
-      hi: "Hey there! What’s up? Skills, projects, or a laugh?",
-      hello: "Hi! Ready to explore Amit’s world—or just here to goof off? 😄",
-      skills: "Amit’s a wizard with React, Next.js, Node.js, and more! Check the <a href='/about' class='text-primary hover:underline'>About page</a>.",
+      hi: "Hey there! What's up? Skills, projects, or a laugh?",
+      hello: "Hi! Ready to explore Amit's world—or just here to goof off? 😄",
+      skills: "Amit's a wizard with React, Next.js, Node.js, and more! Check the <a href='/about' class='text-primary hover:underline'>About page</a>.",
       projects:
         "Amit built Snapgram and Job Portal—pretty cool, huh? See more on the <a href='/projects' class='text-primary hover:underline'>Projects page</a>.",
       experience:
-        "3+ years at iServeu, DRDO, and beyond. Amit’s story’s on the <a href='/experience' class='text-primary hover:underline'>Experience page</a>.",
+        "3+ years at iServeu, DRDO, and beyond. Amit's story's on the <a href='/experience' class='text-primary hover:underline'>Experience page</a>.",
       contact: (last) =>
         last?.includes('how')
-          ? "Email Amit at <a href='mailto:amitkumarsatapathy645@gmail.com' class='text-primary hover:underline'>amitkumarsatapathy645@gmail.com</a>. Don’t spam him with memes—unless they’re good! 😜"
+          ? "Email Amit at <a href='mailto:amitkumarsatapathy645@gmail.com' class='text-primary hover:underline'>amitkumarsatapathy645@gmail.com</a>. Don't spam him with memes—unless they're good! 😜"
           : "Reach Amit via the <a href='/contact' class='text-primary hover:underline'>Contact page</a> or amitkumarsatapathy645@gmail.com.",
       resume:
-        "Grab Amit’s resume <a href='/resume.pdf' class='text-primary hover:underline' target='_blank'>here</a>. It’s less boring than most!",
+        "Grab Amit's resume <a href='/resume.pdf' class='text-primary hover:underline' target='_blank'>here</a>. It's less boring than most!",
       newsletter:
-        "Join Amit’s LinkedIn newsletter <a href='https://www.linkedin.com/newsletters/your-newsletter-slug/' class='text-primary hover:underline' target='_blank'>here</a>. No spam, just fun insights!",
-      bye: "Catch you later! Don’t trip over a keyboard on your way out! 👋",
+        "Join Amit's LinkedIn newsletter <a href='https://www.linkedin.com/newsletters/your-newsletter-slug/' class='text-primary hover:underline' target='_blank'>here</a>. No spam, just fun insights!",
+      bye: "Catch you later! Don't trip over a keyboard on your way out! 👋",
       goodbye: "Farewell, human! May your code always compile. 😎",
-      coffee: "I’d brew you a cup, but I’m digital. How about some code fuel instead? ☕",
-      joke: "Why don’t skeletons fight each other? Because they don’t have the guts! 😂",
+      coffee: "I'd brew you a cup, but I'm digital. How about some code fuel instead? ☕",
+      joke: "Why don't skeletons fight each other? Because they don't have the guts! 😂",
       bored: "Bored, huh? Type 'party' and see what happens... 😉",
-      party: "🎉 Party time! Enjoy the chaos—I’ll clean up the confetti later! 🎊",
+      party: "🎉 Party time! Enjoy the chaos—I'll clean up the confetti later! 🎊",
     };
 
     const lowerInput = input.toLowerCase().trim();
     let response =
-      "Hmm, I’m stumped! Try skills, projects, or something fun like 'joke' or 'coffee'.";
+      "Hmm, I'm stumped! Try skills, projects, or something fun like 'joke' or 'coffee'.";
 
     for (const [keyword, reply] of Object.entries(botResponses)) {
       if (new RegExp(`\\b${keyword}\\b`).test(lowerInput)) {
@@ -90,13 +113,14 @@ export default function ChatBot({ onClose }: ChatBotProps) {
 
     if (/help|what can you do/i.test(lowerInput)) {
       response =
-        "I can spill the beans on Amit’s skills, projects, or crack a joke! What’s your vibe?";
+        "I can spill the beans on Amit's skills, projects, or crack a joke! What's your vibe?";
     }
 
     setIsTyping(true);
     const typeMessage = (text: string) => {
       let currentText = '';
-      const typingSpeed = 20;
+      // Faster typing on mobile for better UX
+      const typingSpeed = window.innerWidth < 640 ? 15 : 20;
       const botMessage: Message = {
         text: '',
         isUser: false,
@@ -128,13 +152,13 @@ export default function ChatBot({ onClose }: ChatBotProps) {
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text.replace(/<[^>]+>/g, ''));
-    alert('Copied! Don’t paste it somewhere silly!');
+    alert('Copied! Dont paste it somewhere silly!');
   };
 
   const handleClearChat = () => {
     setMessages([
       {
-        text: "Chat wiped clean! Let’s start fresh—maybe with a joke? 😜",
+        text: "Chat wiped clean! Lets start fresh—maybe with a joke? 😜",
         isUser: false,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       },
@@ -143,11 +167,25 @@ export default function ChatBot({ onClose }: ChatBotProps) {
     setIsPartyMode(false);
   };
 
+  // Calculate width based on screen size
+  const chatWidth = typeof window !== 'undefined' 
+    ? window.innerWidth < 640 
+      ? 'w-[95%] max-w-[95%]' 
+      : window.innerWidth < 768 
+        ? 'w-[90%] max-w-md' 
+        : 'w-full max-w-md'
+    : 'w-full max-w-md';
+
   return (
     <motion.div
-      className={`fixed bottom-6 right-6 w-full max-w-md bg-gradient-to-br from-card/95 to-card/85 backdrop-blur-3xl border border-accent/50 rounded-2xl shadow-lg z-50 flex flex-col transition-all duration-500 ${
-        isMinimized ? 'h-16 w-16' : 'max-h-[85vh]'
-      } ${isPartyMode ? 'animate-party-bg' : ''}`}
+      ref={chatContainerRef}
+      className={`fixed ${isMinimized ? 'bottom-4 right-4' : 'bottom-0 right-0 sm:bottom-6 sm:right-6'} 
+        ${isMinimized ? 'h-16 w-16' : chatWidth} 
+        bg-gradient-to-br from-card/95 to-card/85 backdrop-blur-3xl 
+        border border-accent/50 rounded-2xl sm:rounded-2xl ${isMinimized ? 'rounded-full' : 'rounded-t-2xl sm:rounded-2xl'} 
+        shadow-lg z-50 flex flex-col transition-all duration-500
+        ${isMinimized ? '' : 'max-h-[85vh] sm:max-h-[75vh] md:max-h-[80vh]'} 
+        ${isPartyMode ? 'animate-party-bg' : ''}`}
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
@@ -170,18 +208,17 @@ export default function ChatBot({ onClose }: ChatBotProps) {
         </Button>
       ) : (
         <>
-          {/* Header */}
-          <div className="flex justify-between items-center p-4 border-b border-accent/50 bg-gradient-to-r from-card/70 to-card/50 rounded-t-2xl">
-            <div className="flex items-center gap-3">
+          {/* Header - optimized for mobile */}
+          <div className="flex justify-between items-center p-3 sm:p-4 border-b border-accent/50 bg-gradient-to-r from-card/70 to-card/50 rounded-t-2xl">
+            <div className="flex items-center gap-2 sm:gap-3">
               <motion.div
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                className="text-primary text-2xl"
+                className="text-primary text-xl sm:text-2xl"
                 whileHover={
                   lastQuery === 'joke' || isPartyMode ? { rotate: [0, 10, -10, 0] } : undefined
                 }
-                // Use tween for party mode animation with keyframes
                 {...(isPartyMode
                   ? {
                       animate: { rotate: [0, 15, -15, 0], scale: 1.2 },
@@ -191,14 +228,14 @@ export default function ChatBot({ onClose }: ChatBotProps) {
               >
                 🤖
               </motion.div>
-              <h3 className="text-xl font-semibold text-foreground tracking-tight">Amit’s Assistant</h3>
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground tracking-tight">Amit's Assistant</h3>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-1 sm:gap-2">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsSoundOn(!isSoundOn)}
-                className="hover:bg-accent/40 hover:shadow-md transition-all"
+                className="h-8 w-8 sm:h-9 sm:w-9 hover:bg-accent/40 hover:shadow-md transition-all"
                 aria-label={isSoundOn ? 'Mute sound' : 'Enable sound'}
               >
                 {isSoundOn ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
@@ -207,7 +244,7 @@ export default function ChatBot({ onClose }: ChatBotProps) {
                 variant="ghost"
                 size="icon"
                 onClick={handleClearChat}
-                className="hover:bg-accent/40 hover:shadow-md transition-all"
+                className="h-8 w-8 sm:h-9 sm:w-9 hover:bg-accent/40 hover:shadow-md transition-all"
                 aria-label="Clear chat"
               >
                 <Trash2 className="h-4 w-4" />
@@ -215,8 +252,17 @@ export default function ChatBot({ onClose }: ChatBotProps) {
               <Button
                 variant="ghost"
                 size="icon"
+                onClick={() => setIsMinimized(true)}
+                className="h-8 w-8 sm:h-9 sm:w-9 hover:bg-accent/40 hover:shadow-md transition-all hidden sm:flex"
+                aria-label="Minimize chatbot"
+              >
+                <ChevronDown className="h-4 w-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={onClose}
-                className="hover:bg-accent/40 hover:shadow-md transition-all"
+                className="h-8 w-8 sm:h-9 sm:w-9 hover:bg-accent/40 hover:shadow-md transition-all"
                 aria-label="Close chatbot"
               >
                 <X className="h-5 w-5" />
@@ -224,25 +270,40 @@ export default function ChatBot({ onClose }: ChatBotProps) {
             </div>
           </div>
 
-          {/* Suggestions */}
-          <div className="flex flex-wrap gap-2 p-4 border-b border-accent/50 bg-card/60">
-            {['Skills', 'Projects', 'Make Me Laugh'].map((suggestion) => (
-              <Badge
-                key={suggestion}
-                className={`cursor-pointer bg-primary/15 hover:bg-primary/25 transition-all duration-300 shadow-sm hover:shadow-md rounded-full px-3 py-1 ${
-                  suggestion === 'Make Me Laugh' ? 'animate-wiggle' : ''
-                }`}
-                onClick={() => {
-                  setInput(suggestion === 'Make Me Laugh' ? 'joke' : suggestion);
-                  handleSend();
-                }}
+          {/* Suggestions with toggle for mobile */}
+          <div className="border-b border-accent/50 bg-card/60">
+            <div className="flex justify-between items-center px-4 py-2 sm:hidden">
+              <span className="text-xs text-muted-foreground">Quick suggestions</span>
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => setShowSuggestions(!showSuggestions)} 
+                className="h-6 w-6 p-1"
               >
-                {suggestion}
-              </Badge>
-            ))}
+                {showSuggestions ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+              </Button>
+            </div>
+            
+            {/* Suggestion chips */}
+            <div className={`flex flex-wrap gap-2 px-4 pb-3 ${showSuggestions ? '' : 'hidden sm:flex'} sm:py-4`}>
+              {['Skills', 'Projects', 'Experience', 'Make Me Laugh'].map((suggestion) => (
+                <Badge
+                  key={suggestion}
+                  className={`cursor-pointer bg-slate-100 hover:bg-primary/25 transition-all 
+                  duration-300 shadow-sm hover:shadow-md rounded-full px-2 py-1 text-xs sm:px-3 sm:py-1 sm:text-sm
+                  ${suggestion === 'Make Me Laugh' ? 'animate-wiggle' : ''}`}
+                  onClick={() => {
+                    setInput(suggestion === 'Make Me Laugh' ? 'joke' : suggestion);
+                    handleSend();
+                  }}
+                >
+                  {suggestion}
+                </Badge>
+              ))}
+            </div>
           </div>
 
-          {/* Messages */}
+          {/* Messages - optimized for better mobile display */}
           <div
             className="flex-1 overflow-y-auto p-6 space-y-8 bg-gradient-to-b from-transparent to-card/40 custom-scrollbar"
             aria-live="polite"
