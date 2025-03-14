@@ -5,7 +5,7 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { Briefcase, GraduationCap, Award, ExternalLink, MapPin, Calendar, ChevronRight, Download } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { useTheme } from 'next-themes';
+// import { useTheme } from 'next-themes';
 
 // Define interfaces for type safety
 interface Experience {
