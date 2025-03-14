@@ -228,7 +228,7 @@ export default function ChatBot({ onClose }: ChatBotProps) {
               >
                 🤖
               </motion.div>
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground tracking-tight">Amit's Assistant</h3>
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground tracking-tight">Amit&apos;s Assistant</h3>
             </div>
             <div className="flex gap-1 sm:gap-2">
               <Button
