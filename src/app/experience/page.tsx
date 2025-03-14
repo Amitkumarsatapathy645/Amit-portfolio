@@ -179,14 +179,14 @@ export default function ExperiencePage() {
     target: containerRef,
     offset: ["start start", "end end"]
   });
-  const { theme } = useTheme();
+  // const { theme } = useTheme();
   const [activeSection, setActiveSection] = useState("");
-  const [isMounted, setIsMounted] = useState(false);
+  // const [ setIsMounted] = useState(false);
 
   // Ensure theme-related code only runs client-side
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  // useEffect(() => {
+  //   setIsMounted(true);
+  // }, []);
 
   // const isDark = isMounted && theme === 'dark';
   const yPositionHeader = useTransform(scrollYProgress, [0, 1], [0, -80]);
