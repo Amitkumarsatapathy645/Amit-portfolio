@@ -53,7 +53,7 @@ export default function FeaturedProjects() {
     arrows: true,
     pauseOnHover: true,
     dotsClass: "slick-dots custom-dots",
-    customPaging: (i) => (
+    customPaging: () => (
       <div className="custom-dot w-2 h-2 rounded-full bg-primary/30"></div>
     )
   };

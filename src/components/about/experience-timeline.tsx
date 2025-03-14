@@ -1,11 +1,11 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { motion, useInView, useScroll } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { IoArrowForward, IoTime, IoCalendarOutline, IoBusinessOutline, IoCheckmarkCircle } from 'react-icons/io5'
+import { IoArrowForward, IoCalendarOutline, IoBusinessOutline, IoCheckmarkCircle } from 'react-icons/io5'
 
 interface Experience {
   title: string;

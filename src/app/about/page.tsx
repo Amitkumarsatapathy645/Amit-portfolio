@@ -73,7 +73,7 @@ export default function AboutPage() {
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">Me</span>
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                I'm a passionate developer with over 3 years of experience building modern web applications. 
+                I&apos;m a passionate developer with over 3 years of experience building modern web applications. 
                 I specialize in creating user-friendly, scalable solutions that solve real-world problems.
               </p>
               

@@ -179,7 +179,7 @@ export default function ExperiencePage() {
     target: containerRef,
     offset: ["start start", "end end"]
   });
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const [activeSection, setActiveSection] = useState("");
   const [isMounted, setIsMounted] = useState(false);
 
@@ -188,7 +188,7 @@ export default function ExperiencePage() {
     setIsMounted(true);
   }, []);
 
-  const isDark = isMounted && theme === 'dark';
+  // const isDark = isMounted && theme === 'dark';
   const yPositionHeader = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const headerOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
   const timelineProgress = useTransform(scrollYProgress, [0, 0.9], [0, 1]);

@@ -1,7 +1,7 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ProjectCard } from '@/components/projects/project-card';
+// import { ProjectCard } from '@/components/projects/project-card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search, ExternalLink, Github, Code } from 'lucide-react';

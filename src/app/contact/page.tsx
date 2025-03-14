@@ -27,7 +27,7 @@ const ContactPage = () => {
   const [success, setSuccess] = useState(false);
   
   const formRef = useRef(null);
-  const isInView = useInView(formRef, { once: true, amount: 0.3 });
+  // const isInView = useInView(formRef, { once: true, amount: 0.3 });
   
   // Validate individual fields as user types
   const validateField = (name: string, value: string) => {
@@ -160,10 +160,10 @@ const ContactPage = () => {
         >
           <motion.div variants={itemVariants} className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Let's <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500">Connect</span>
+              Let&apos;s <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500">Connect</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Have an exciting project in mind? Let's bring it to life together!
+              Have an exciting project in mind? Let&apos;s bring it to life together!
             </p>
           </motion.div>
 

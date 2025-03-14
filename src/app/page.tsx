@@ -279,12 +279,12 @@ export default function HomePage() {
             className="max-w-3xl mx-auto text-center"
           >
             <h2 className="text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-500">
-              Let's Collaborate
+              Let&apos;s Collaborate
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-blue-500 rounded-full mx-auto mb-6" />
             <p className="text-lg text-muted-foreground mb-12">
               I welcome opportunities to discuss professional collaborations, innovative projects, 
-              and how my expertise can contribute to your organization's technical objectives.
+              and how my expertise can contribute to your organization&apos;s technical objectives.
             </p>
             <Button asChild size="lg" className="font-medium relative overflow-hidden group">
               <a 
